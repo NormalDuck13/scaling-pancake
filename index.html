@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scaling Pancake</title>
+</head>
+<body>
+    <h1>Scaling Pancake</h1>
+    <form id="repoForm">
+        <label for="repoUrl">GitHub Repository URL:</label>
+        <input type="text" id="repoUrl" name="repoUrl" required>
+        <button type="submit">Run</button>
+    </form>
+    <script>
+        document.getElementById('repoForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const repoUrl = document.getElementById('repoUrl').value;
+            fetch(`scripts/clone_and_run.sh?repo=${encodeURIComponent(repoUrl)}`)
+                .then(response => response.text())
+                .then(data => console.log(data))
+                .catch(error => console.error('Error:', error));
+        });
+    </script>
+</body>
+</html>
